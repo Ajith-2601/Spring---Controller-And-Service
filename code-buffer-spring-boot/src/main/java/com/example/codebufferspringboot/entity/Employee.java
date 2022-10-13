@@ -1,10 +1,16 @@
 package com.example.codebufferspringboot.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
+//JsonIgnoreProperties - Ignoring multiple parameters
+@JsonIgnoreProperties({"department","emailId"})
 public class Employee {
     private String employeeId;
     private String firstName;
     private String lastName;
     private String emailId;
+    //@JsonIgnore - Ignoring Particular Properties
     private String department;
 
     public String getEmployeeId() {

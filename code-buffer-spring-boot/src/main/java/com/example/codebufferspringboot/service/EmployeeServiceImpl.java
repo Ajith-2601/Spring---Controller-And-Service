@@ -1,6 +1,7 @@
 package com.example.codebufferspringboot.service;
 
 import com.example.codebufferspringboot.entity.Employee;
+import com.example.codebufferspringboot.error.EmployeeNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -32,7 +33,7 @@ public class EmployeeServiceImpl implements EmployeeService {
                 .stream()
                 .filter(employee -> employee.getEmployeeId().equalsIgnoreCase(employeeId))
                 .findFirst()
-                .get();
+                .orElseThrow(()-> new EmployeeNotFoundException("Employee Id Not Present!!"+employeeId));
     }
 
     @Override
@@ -41,7 +42,7 @@ public class EmployeeServiceImpl implements EmployeeService {
                 .stream()
                 .filter(e -> e.getFirstName().equalsIgnoreCase(firstName))
                 .findFirst()
-                .get();
+                .orElseThrow(()-> new RuntimeException(""+"Employee First Name Not Found :" +""+ firstName));
         employeeList.remove(employee);
         return "Employee as been deleted!!!" + firstName;
     }
